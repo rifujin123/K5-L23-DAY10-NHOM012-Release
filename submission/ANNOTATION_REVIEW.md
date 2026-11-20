@@ -1,14 +1,13 @@
-# Bằng chứng phần Annotation Review & Hiệu chỉnh ngưỡng trên lô sạch
+# Đối chiếu nhãn và review ảnh
 
-Ngày cập nhật: 20/11/2026. Phạm vi: Người 2 — Hà Khánh (Phần 2: `REV-01`..`REV-08`).
-Không đọc `_private/`, `data_source/` hay annotation COCO trong validator; không sửa `delivery/` v1 hay `scripts/`.
+Ngày cập nhật: 20/11/2026. Hà Khánh phụ trách phần đối chiếu nhãn và chuẩn bị review ảnh (`REV-01` đến `REV-08`). Validator chỉ đọc dữ liệu được giao trong `delivery/`; nhóm giữ nguyên v1 và không sửa các script của đề.
 
 ## 1. Bằng chứng đo nhiễu và hiệu chỉnh ngưỡng trên lô sạch (`runs/clean`)
 
-Vì thư mục `runs/` nằm trong `.gitignore`, bản kết quả chạy thực tế của lô sạch (seed `5`, `--no-faults`, 50 ảnh thuộc pool `calib` tách biệt hoàn toàn 250 ảnh luyện tập) được lưu kèm tại:
+Nhóm chạy thử trên lô sạch seed `5` với tùy chọn `--no-faults`. Lô này có 50 ảnh thuộc pool `calib`, tách biệt với 250 ảnh luyện tập. Vì `runs/` không được commit, kết quả ứng viên được lưu tại:
 - [submission/annotation_review/clean-candidates.json](annotation_review/clean-candidates.json)
 
-### Lệnh tái lập trên mọi máy trong nhóm
+### Lệnh chạy lại
 
 ```powershell
 py -X utf8 scripts/inject_release.py --seed 5 --no-faults --out runs/clean
@@ -40,20 +39,20 @@ py -X utf8 -B validator/validate.py runs/clean/delivery --out runs/clean/rules.j
 | `missing_box` | `missing_min_seg_px = 800`, `missing_min_area_ratio = 0.004` (sàn `250 px`) | Cao hơn mức nhiễu lớn nhất trên `runs/clean` (`299 px` / `0,083%`) để không báo thừa vật quá nhỏ. |
 | `instance_merge` | `merge_min_seg_px = 600`, `merge_max_box_iou = 0.65`, `merge_min_part_px = 150`, `merge_min_part_ratio = 0.12`, `merge_min_union_gain = 0.12` | `merge_max_box_iou < 0.65` và `union_gain ≥ 0.12` chặn báo nhầm cặp `duplicate_box` (chỉ lệch 1–2 px). |
 
-## 2. Kết quả chạy thực tế trên lô luyện tập `runs/r12007` (seed `12007`)
+## 2. Kết quả trên lô luyện tập `runs/r12007`
 
-- **Lô v1 (`lab250_823c03178b31`):** `250` ảnh manifest, quét `249` ảnh (bỏ qua an toàn `1` ảnh thiếu file `missing_image`).
+- Lô v1 `lab250_7fa680a7413b` có 250 ảnh trong manifest. Validator quét được 249 ảnh; một ảnh thiếu file được ghi nhận là `missing_image`.
 - **Hàng đợi & review bằng mắt (cả 4 thành viên xem qua `tools/review_viewer.py`):**
   - Vòng review đầu sinh **`11` ứng viên trên `11` ảnh** (`missing_box: 3`, `instance_merge: 3`, `class_swap/category_swap: 3`, `bbox_drift: 2`).
   - Kết quả xem ảnh thật trong `runs/r12007/review_log.csv`: **`10 confirmed` + `1 rejected`** (ảnh `000000002153` là 3 người chồng lấn góc nhìn trước/sau, mỗi người đều có đủ box và mask riêng — đã ghi `rejected` kèm lý do và sửa thứ tự ghép 1-1 trước `instance_merge` trong `validator/cross_check.py`).
   - Sau khi vá lỗi thứ tự `instance_merge` và cập nhật ngưỡng hiệu chỉnh theo `runs/clean`, `validator/validate.py` sinh **`10` ứng viên trên `10` ảnh** cho `r12007` và vẫn **`0` ứng viên** trên `runs/clean`.
 - **Gộp kết quả (`scripts/merge_review.py`) và tự đo (`scripts/score_findings.py --run runs/r12007`):**
   - `runs/r12007/errors.json`: **`22` lỗi** (`12` lỗi luật từ `rules.json` + `10` lỗi gán nhãn đã `confirmed`).
-  - Tự đo làm tròn: **F1 tổng ≈ `1.0` · lỗi luật ≈ `1.0` · lỗi gán nhãn ≈ `0.9`**.
-- **Kiểm tra định dạng (`scripts/check_handover.py --run runs/r12007`):** **`H1 PASS`**, **`H2 PASS`**, **`H3 PASS`** (chờ phần v2 của Người 3 từ `H4` trở đi).
+  - Tự đo lại trên run `lab250_7fa680a7413b` bằng `py -X utf8 -B scripts/score_findings.py --run runs/r12007`: **F1 tổng ≈ `1.0` · lỗi luật ≈ `1.0` · lỗi gán nhãn ≈ `0.9`**. Đây là kết quả làm tròn một chữ số thập phân.
+- **Kiểm tra định dạng (`scripts/check_handover.py --run runs/r12007`):** trên run `lab250_7fa680a7413b`, kết quả thực chạy sau khi đồng bộ và đóng gói lại là **17 PASS, 0 FAIL**. PASS không chứng minh nhãn đúng.
 - **Kiểm thử đơn vị:** `18/18` PASS (`tests/test_validation.py` 13/13 + `tests/test_cross_check.py` 5/5); AST xác nhận `validator/validate.py`, `validator/rules.py`, `validator/cross_check.py` chỉ dùng thư viện chuẩn Python + `scripts/pngutil.py`.
 
 ## 3. Các mục chung còn chờ cả nhóm
 
 - Xác nhận quy mô nhóm 4 người với giảng viên/coach (đề gốc ghi 5–6 người).
-- Bổ sung `submission/de_an/` khi giảng viên phát đề ẩn 40 phút (`delivery/` của đề ẩn không commit).
+- Đề ẩn đã có bốn file kết quả trong `submission/de_an/`; không commit `delivery/` của đề ẩn.

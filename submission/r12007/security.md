@@ -11,4 +11,4 @@ Không chép dữ liệu ra USB cá nhân, gửi qua email cá nhân hoặc nh�
 - Không đưa tài khoản CVAT cho đồng nghiệp; mỗi người dùng tài khoản riêng để truy vết thao tác.
 
 ## 3. Ca khuôn mặt: thấy mặt người rõ trong lô, guideline yêu cầu làm mờ
-Hold ảnh liên quan và báo người phụ trách dữ liệu/bảo mật cùng quản lý job để tạo bản làm mờ theo quy trình đã duyệt. Không tự sửa hay xóa ảnh gốc vì cần giữ bằng chứng và lịch sử bàn giao; chỉ đưa bản dẫn xuất đã được duyệt vào luồng xử lý tiếp theo. Ảnh `000000009590` trong lô có nhiều khuôn mặt nhìn rõ, nên cần xử lý theo yêu cầu làm mờ trước khi chia sẻ ra ngoài nhóm được phép.
+Hold lô và báo người phụ trách dữ liệu/bảo mật cùng quản lý job để tạo bản làm mờ theo quy trình đã duyệt. Không tự sửa hay xóa ảnh gốc vì cần giữ bằng chứng và lịch sử bàn giao; chỉ đưa bản dẫn xuất đã được duyệt vào luồng xử lý tiếp theo. Ảnh `000000009590` trong lô có nhiều khuôn mặt nhìn rõ, nên cần xử lý theo yêu cầu làm mờ trước khi chia sẻ ra ngoài nhóm được phép.
