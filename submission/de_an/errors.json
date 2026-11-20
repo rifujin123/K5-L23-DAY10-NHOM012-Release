@@ -1,48 +1,84 @@
 {
-  "errors": [
-    {
-      "type": "bbox_out_of_bounds",
-      "target": "img_0069"
-    },
-    {
-      "type": "guideline_mismatch",
-      "target": "img_0095"
-    },
-    {
-      "type": "guideline_mismatch",
-      "target": "img_0247"
-    },
-    {
-      "type": "invalid_category_id",
-      "target": "img_0020"
-    },
-    {
-      "type": "invalid_class",
-      "target": "img_0159"
-    },
-    {
-      "type": "missing_image",
-      "target": "img_0209"
-    },
-    {
-      "type": "scene_leak",
-      "target": "scene_735"
-    },
-    {
-      "type": "thing_overlap",
-      "target": "img_0036"
-    },
-    {
-      "type": "thing_overlap",
-      "target": "img_0177"
-    },
-    {
-      "type": "wrong_hash",
-      "target": "img_0038"
-    },
-    {
-      "type": "wrong_hash",
-      "target": "img_0199"
-    }
-  ]
+ "errors": [
+  {
+   "type": "bbox_drift",
+   "target": "img_0003"
+  },
+  {
+   "type": "bbox_drift",
+   "target": "img_0106"
+  },
+  {
+   "type": "bbox_drift",
+   "target": "img_0164"
+  },
+  {
+   "type": "bbox_drift",
+   "target": "img_0173"
+  },
+  {
+   "type": "bbox_out_of_bounds",
+   "target": "img_0069"
+  },
+  {
+   "type": "category_swap",
+   "target": "img_0037"
+  },
+  {
+   "type": "category_swap",
+   "target": "img_0127"
+  },
+  {
+   "type": "class_swap",
+   "target": "img_0045"
+  },
+  {
+   "type": "guideline_mismatch",
+   "target": "img_0095"
+  },
+  {
+   "type": "guideline_mismatch",
+   "target": "img_0247"
+  },
+  {
+   "type": "invalid_category_id",
+   "target": "img_0020"
+  },
+  {
+   "type": "invalid_class",
+   "target": "img_0159"
+  },
+  {
+   "type": "missing_box",
+   "target": "img_0159"
+  },
+  {
+   "type": "missing_box",
+   "target": "img_0169"
+  },
+  {
+   "type": "missing_image",
+   "target": "img_0209"
+  },
+  {
+   "type": "scene_leak",
+   "target": "scene_735"
+  },
+  {
+   "type": "thing_overlap",
+   "target": "img_0036"
+  },
+  {
+   "type": "thing_overlap",
+   "target": "img_0177"
+  },
+  {
+   "type": "wrong_hash",
+   "target": "img_0038"
+  },
+  {
+   "type": "wrong_hash",
+   "target": "img_0199"
+  }
+ ]
 }

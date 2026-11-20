@@ -1,0 +1,10 @@
+image,type,verdict,note
+img_0003,bbox_drift,confirmed,Hà Khánh xem : Quyển sách màu vàng bị nhận diện lệch
+img_0037,category_swap,confirmed,Lê Tuấn Khôi xem : nhận dạng dĩa nhầm thành spoon
+img_0045,class_swap,confirmed,Nguyễn Trường Giang xem : nhận diện nhầm bus thành truck
+img_0106,bbox_drift,confirmed,Nguyễn Viết Quang : Con ngựa bị nhận diện chưa đủ
+img_0127,category_swap,confirmed,Hà Khánh xem: Nhận diện nhầm suitcase ( vali) thành handbag ( túi đeo tay )
+img_0159,missing_box,confirmed,Lê Tuấn Khôi xem : Điện thoại đã đc nhận diện nma thiếu nhãn của dat
+img_0164,bbox_drift,confirmed,Nguyễn Trường Giang xem : Biển báo bị nhận diện lệch
+img_0169,missing_box,confirmed,Nguyễn Viết Quang xem : Pan đã nhận diện đc ô tô nhưng det thì ko nhận diện ko có box nhận diện
+img_0173,bbox_drift,confirmed,Hà Khánh xem : Nhận diện xe buýt bị lệch
