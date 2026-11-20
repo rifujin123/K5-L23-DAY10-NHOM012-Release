@@ -1,6 +1,6 @@
 # Bàn giao phần Data Validation
 
-Ngày thực hiện: 19/11/2026. Phạm vi: Người 1, 9 lỗi luật trong roadmap.
+Ngày thực hiện: 19/11/2026. Phạm vi: triển khai ban đầu phần Data Validation (9 lỗi luật trong roadmap). Theo phân công hiện tại trong `TEAM.md`, Khôi phụ trách Data Validation; ghi chép dưới đây vẫn giữ lịch sử triển khai ban đầu của Giang.
 Lô chính có sẵn khi bắt đầu: runs/r12007/delivery. TEAM.md chưa điền seed;
 không tự điền danh tính hoặc xác nhận thay nhóm.
 

@@ -1,4 +1,4 @@
-# Người 1: Data Validation - Nguyễn Trường Giang
+# Người 1: Data Validation - Lê Tuấn Khôi
 
 ## Mục tiêu
 
